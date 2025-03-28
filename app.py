@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, make_response, Response
 from fpdf import FPDF
-
+import os
 app = Flask(__name__)
 
 # All scenarios and choices
