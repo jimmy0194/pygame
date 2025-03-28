@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flood Emergency Game</title>
+    <style>
+        /* General Reset */
+        body, h1, p, a {
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', sans-serif;
+        }
+
+        /* Background Animation */
+        @keyframes bgAnimation {
+            0% { background-color: #74b9ff; }
+            50% { background-color: #00cec9; }
+            100% { background-color: #0984e3; }
+        }
+
+        body {
+            animation: bgAnimation 8s infinite alternate;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        /* Heading Styling */
+        h1 {
+            font-size: 3rem;
+            text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Pulse Effect */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Paragraph Styling */
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+        }
+
+        /* Button Styling */
+        .btn {
+            background-color: #ff7675;
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            text-decoration: none;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: #d63031;
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+            100% { transform: translateY(0); }
+        }
+
+        h1, p, .btn {
+            animation: float 4s infinite;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Flood Emergency Response Game 🌊</h1>
+    <p>You are a flood response manager. Make the best choices to save lives and minimize damage.</p>
+    <a href="{{ url_for('play', index=0) }}" class="btn">🚀 Start Game</a>
+</body>
+</html>

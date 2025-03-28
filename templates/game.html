@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scenario {{ index + 1 }}</title>
+    <style>
+        /* Reset and General Styling */
+        body, h1, p, form, label, button {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Background Animation */
+        @keyframes bgAnimation {
+            0% { background-color: #74b9ff; }
+            50% { background-color: #00cec9; }
+            100% { background-color: #0984e3; }
+        }
+
+        body {
+            animation: bgAnimation 8s infinite alternate;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Heading Animation */
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Scenario Text */
+        p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 700px;
+            line-height: 1.6;
+        }
+
+        /* Form and Label Styling */
+        form {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            animation: fadeIn 1.5s;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        label {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        label:hover {
+            color: #ff7675;
+        }
+
+        /* Radio Button Styling */
+        input[type="radio"] {
+            transform: scale(1.2);
+            margin-right: 10px;
+            accent-color: #fdcb6e;
+        }
+
+        /* Button Styling */
+        .btn {
+            background-color: #ff7675;
+            color: white;
+            padding: 12px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #d63031;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <h1>🌊 Scenario {{ index + 1 }}</h1>
+    <p>{{ scenario.text }}</p>
+    <form action="{{ url_for('result') }}" method="post">
+        {% for i in range(3) %}
+            <label>
+                <input type="radio" name="choice" value="{{ i+1 }}" required>
+                {{ scenario.choices[i] }}
+            </label>
+        {% endfor %}
+        <input type="hidden" name="index" value="{{ index }}">
+        <button type="submit" class="btn">🚀 Submit Choice</button>
+    </form>
+</body>
+</html>

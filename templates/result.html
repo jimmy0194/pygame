@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Result</title>
+    <style>
+        /* Reset and General Styling */
+        body, h1, p, a {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Background Animation */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body {
+            background: linear-gradient(45deg, #1e90ff, #00bcd4, #00ff7f, #ff4081);
+            background-size: 300% 300%;
+            animation: gradientAnimation 8s infinite;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Heading Animation */
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #ffe259, #ffa751);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1.5s;
+        }
+
+        @keyframes fadeInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Paragraph Styling with Scale Animation */
+        p {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            animation: scaleIn 1.2s ease-in-out;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* Button Style with Hover Effect */
+        .btn {
+            background-color: #ff4081;
+            color: white;
+            font-size: 1.3rem;
+            padding: 15px 40px;
+            margin-top: 30px;
+            border: none;
+            border-radius: 50px;
+            text-decoration: none;
+            display: inline-block;
+            animation: bounceIn 1.5s;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            80% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .btn:hover {
+            background-color: #ff79a6;
+            transform: scale(1.1);
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Animation for Transition to Summary */
+        a.btn.summary {
+            background-color: #00bcd4;
+        }
+
+        a.btn.summary:hover {
+            background-color: #4dd0e1;
+        }
+
+        /* Particle Animation Effect */
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0); }
+        }
+
+        .particle {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 50%;
+            animation: float 4s infinite;
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Result</h1>
+    <p><strong>Scenario:</strong> {{ scenario.text }}</p>
+    <p><strong>Outcome:</strong> {{ result.message }}</p>
+    <p><strong>Current Score:</strong> {{ score }}</p>
+
+    {% if index + 1 < scenarios|length %}
+        <a href="{{ url_for('play', index=index + 1) }}" class="btn">🚀 Next Scenario</a>
+    {% else %}
+        <a href="{{ url_for('summary') }}" class="btn summary">📊 View Summary</a>
+    {% endif %}
+
+    <!-- Particles for Visual Effect -->
+    <script>
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            document.body.appendChild(particle);
+
+            const size = Math.random() * 20 + 10;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight;
+            particle.style.left = `${posX}px`;
+            particle.style.top = `${posY}px`;
+
+            particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+            particle.style.animationDelay = `${Math.random() * 3}s`;
+
+            setTimeout(() => particle.remove(), 8000);
+        }
+
+        setInterval(createParticle, 300);
+    </script>
+</body>
+</html>

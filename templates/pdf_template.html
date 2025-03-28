@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Game Summary</title>
+    <script src="https://cdn.jsdelivr.net/npm/html2pdf.js@0.9.3/dist/html2pdf.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            background-color: #282c34;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎉 Game Summary</h1>
+    <p>Your Final Score: <strong>{{ score }}</strong></p>
+    <p><strong>Scenario:</strong> {{ scenario }}</p>
+    <p><strong>Outcome:</strong> {{ result }}</p>
+    <p>{{ message }}</p>
+
+    <!-- Download PDF using Ajax -->
+    <button class="btn" onclick="generatePDF()">📥 Download PDF</button>
+
+    <script>
+        function generatePDF() {
+            const score = "{{ score }}";
+            const scenario = "{{ scenario }}";
+            const result = "{{ result }}";
+
+            $.ajax({
+                url: `/generate_pdf?score=${score}&scenario=${scenario}&result=${result}`,
+                type: 'GET',
+                success: function(response) {
+                    alert("PDF generated successfully. Please check the server folder.");
+                },
+                error: function(error) {
+                    alert("Error generating PDF.");
+                    console.log(error);
+                }
+            });
+        }
+    </script>
+</body>
+</html>
